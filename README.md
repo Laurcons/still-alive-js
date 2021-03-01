@@ -1,7 +1,7 @@
 # Portal's Still Alive: JS Recreation
 No one has said this sentence, ever.
 
-(Project entry on my website)[https://laurcons.ro/projects/12]
+https://laurcons.ro/projects/12
 
 ## Installation
 You should be able to drag-and-drop these files into XAMPP's /htdocs folder or any Apache installation. Even though this is JavaScript, it requires a webserver setup because it uses AJAX calls and it has one PHP file.
