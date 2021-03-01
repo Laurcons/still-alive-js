@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Still Alive</title>
+    <link rel='stylesheet' href="index.css">
+</head>
+<body>
+
+    <div class="pre-container">
+        <pre class="background"></pre>
+        <div class="lyrics-container">
+        </div>
+        <div class="credits-container">
+            <div class="content"></div>
+            <div class="scroll-element"></div>
+        </div>
+        <div class="asciiart-container">
+            <pre class="content"></pre>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script src="scrollClass.js"></script>
+    <script src="printerClass.js"></script>
+    <script>
+        var lyricsPrinter, creditsPrinter, asciiartPrinter;
+
+        writePreCode();
+
+        $(document).ready(function() {
+            $.ajax({
+                url: "lyrics.json",
+                dataType: "json"
+            }).done(function(result) {
+                console.log("loaded lyrics");
+                lyricsPrinter = new Printer({
+                    printDestination: $(".lyrics-container"),
+                    songText: result,
+                    intervalTickSpeed: 25,
+                    audioName: "still-alive.mp3",
+                    animMode: "typewrite",
+                    // scrollElement: $(".right .scroll-element"),
+                    startHidden: false
+                });
+                start();
+            });
+
+            $.ajax({
+                url: "credits.json",
+                dataType: "json"
+            }).done(function(result) {
+                console.log("loaded credits");
+                creditsPrinter = new Printer({
+                    printDestination: $(".credits-container .content"),
+                    songText: result,
+                    animMode: "typewrite",
+                    scrollElement: $(".credits-container .scroll-element"),
+                    startHidden: false
+                });
+                start();
+            });
+
+            $.ajax({
+                url: "asciiart.php",
+                dataType: "json"
+            }).done(function(result) {
+                console.log("loaded asciiart");
+                asciiartPrinter = new Printer({
+                    printDestination: $(".asciiart-container .content"),
+                    songText: result,
+                    animMode: "appear",
+                    // scrollElement: $(".credits-container .scroll-element"),
+                    startHidden: false
+                });
+                start();
+            });
+        });
+
+        let startCount = 0;
+        function start() {
+            console.log("called");
+            startCount++;
+            if (startCount < 3)
+                return;
+            lyricsPrinter.play();
+            creditsPrinter.play();
+            asciiartPrinter.play();
+        }
+
+        function writePreCode() {
+            var output = "";
+            for (let i = 0; i < 49; i++)
+                output += "-";
+            output += "  ";
+            for (let i = 0; i < 49; i++)
+                output += "-";
+            output += "\n";
+            for (let i = 0; i < 29; i++) {
+                output += "|";
+                for (let j = 0; j < 48; j++)
+                    output += ' ';
+                output += "|";
+                if (i <= 16) {
+                    output += "|";
+                    for (let j = 0; j < 48; j++)
+                        output += i === 16 ? '-' : ' ';
+                    output += "|";
+                }
+                output += "\n";
+            }
+            output += "\n\n";
+            for (let i = 0; i < 50; i++)
+                output += "-";
+            $("pre.background").html(output);
+        }
+
+    </script>
+</body>
+</html>

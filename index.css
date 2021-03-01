@@ -1,0 +1,69 @@
+
+html, body {
+    background-color: #000;
+    color: rgb(226, 163, 2);;
+    font-family: Consolas, 'Courier New';
+    font-size: 1.2em;
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.d-none {
+    display: none;
+}
+
+pre {
+    margin: 0;
+}
+
+.pre-container {
+    flex: 0 0;
+    position: relative;
+}
+
+.lyrics-container,.credits-container,.asciiart-container {
+    position: absolute;
+    padding: 2px;
+    /* border: 1px dashed white; */
+}
+
+.lyrics-container {
+    top: 3%;
+    right: 51.3%;
+    left: 1.2%;
+    bottom: 3%;
+    font-size: 0.8em;
+}
+
+.credits-container {
+    top: 3%;
+    right: 1.3%;
+    left: 51.2%;
+    bottom: 48%;
+    overflow-y: hidden;
+    font-size: 0.75em;
+}
+
+.asciiart-container {
+    top: 55%;
+    right: 1.3%;
+    left: 51.2%;
+    bottom: 3%;
+    font-size: 0.8em;
+    display: flex;
+    justify-content: center;
+}
+
+.asciiart-container .content {
+    display: inline-block;
+}
+
+.credits-container .content {
+    padding-top: 400px;
+}
